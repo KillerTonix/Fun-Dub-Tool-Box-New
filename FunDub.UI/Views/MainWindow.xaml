@@ -178,7 +178,7 @@
                                 <TextBox Text="100%" TextAlignment="Center" Height="25" VerticalContentAlignment="Center"/>
                             </Grid>
 
-                            <RadioButton Grid.Column="2" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" Content="Set Manual" VerticalAlignment="Center" Height="25" Padding="5,0" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                            <RadioButton x:Name="ManualRB" Grid.Column="2" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" Content="Set Manual" VerticalAlignment="Center" Height="25" Padding="5,0" HorizontalAlignment="Center" Margin="0,0,0,0" Checked="ManualRB_Checked"/>
                         </Grid>
                     </GroupBox>
 
