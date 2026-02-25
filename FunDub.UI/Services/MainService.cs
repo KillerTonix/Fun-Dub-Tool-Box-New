@@ -8,7 +8,7 @@ namespace FunDub.UI.Services
     {
         public ObservableCollection<MaterialItem> _materials = MainViewModel.Materials;
 
-        public void OpenFileSelector(string category)
+        public bool OpenFileSelector(string category)
         {
             var dialog = new OpenFileDialog { Multiselect = false };
             switch (category)
@@ -39,7 +39,9 @@ namespace FunDub.UI.Services
             if (dialog.ShowDialog() == true)
             {
                 _materials.Add(new MaterialItem { Type = category, Path = dialog.FileName });
+                return true;
             }
+            return false;
         }
 
         public void RemoveFileSelector(string category)

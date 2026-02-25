@@ -1,241 +1,378 @@
-﻿<Window x:Class="FunDub.UI.Views.MainWindow"
+<Window x:Class="FunDub.UI.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FunDub.UI.Views"
-        mc:Ignorable="d"                   
-        Title="Fun Dub Tool Box - Refreshed" Background="#1E1E1E" Foreground="White"
-        Height="720" Width="1280"
+        mc:Ignorable="d"
+        Title="Fun Dub Tool Box" Background="{StaticResource BackgroundMain}" Foreground="{StaticResource TextPrimary}"
+        Height="860" Width="1440"
         WindowStartupLocation="CenterScreen">
-
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="68"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="260"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" Background="#252526" BorderBrush="#333" BorderThickness="0,0,1,0">
-            <Grid Margin="10">
-                <TextBlock Text="Materials" DockPanel.Dock="Top" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-                <StackPanel Margin="0,35,0,0">
+        <!-- ═══════════════════════════════════════════════════════
+             SIDEBAR
+             ═══════════════════════════════════════════════════════ -->
+        <Border Grid.Column="0" Grid.Row="0" Background="{StaticResource BackgroundSidebar}" 
+                BorderBrush="{StaticResource BorderSubtle}" BorderThickness="0,0,1,0">
+            <Grid Margin="14,20,14,14">
+                <!-- Header -->
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Text="MATERIALS" FontSize="12" FontWeight="Bold" 
+                               Foreground="{StaticResource TextMuted}" 
+                               Margin="14,0,0,5" />
+
                     <ToggleButton x:Name="IntroTB" Style="{StaticResource SidebarButtonStyle}" Command="{Binding SelectIntroCommand}" Click="IntroTB_Click">
-                        <Grid HorizontalAlignment="Stretch" Width="180">
+                        <Grid HorizontalAlignment="Stretch" Width="210">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <TextBlock Text="&#xe892;"  FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBlock Text="INTRO" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#xe892;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="22"/>
+                                <TextBlock Text="Intro" VerticalAlignment="Center" FontSize="20"/>
                             </StackPanel>
+                            <ToggleButton x:Name="IntroSaveTB" Style="{StaticResource SaveToggleStyle}" HorizontalAlignment="Right" Click="IntroSaveTB_Click"/>
+                        </Grid>
+                    </ToggleButton>
 
-                            <ToggleButton x:Name="IntroSaveTB" HorizontalAlignment="Right" Background="#3F3F3F" Padding="5" VerticalAlignment="Center" Click="IntroSaveTB_Click">
-                                <TextBlock Text="💾" FontSize="18" Foreground="{StaticResource TextMuted}"/>
-                            </ToggleButton>
-                        </Grid>
-                    </ToggleButton>
-                    <ToggleButton x:Name="VideoTB" Style="{StaticResource SidebarButtonStyle}" Margin="0,0,0,10" Click="VideoTB_Click">
-                        <Grid HorizontalAlignment="Stretch" Width="180">
+                    <ToggleButton x:Name="VideoTB" Style="{StaticResource SidebarButtonStyle}" Click="VideoTB_Click">
+                        <Grid HorizontalAlignment="Stretch" Width="210">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <TextBlock Text="&#xe8b2;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBlock Text="VIDEO" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBlock Text="&#xe8b2;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="22"/>
+                                <TextBlock Text="Video" VerticalAlignment="Center" FontSize="20"/>
                             </StackPanel>
                         </Grid>
                     </ToggleButton>
+
                     <ToggleButton x:Name="LogoTB" Style="{StaticResource SidebarButtonStyle}" Click="LogoTB_Click">
-                        <Grid HorizontalAlignment="Stretch" Width="180">
+                        <Grid HorizontalAlignment="Stretch" Width="210">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <TextBlock Text="&#xeb9f;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBlock Text="LOGO" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#xeb9f;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="22"/>
+                                <TextBlock Text="Logo" VerticalAlignment="Center" FontSize="20"/>
                             </StackPanel>
-                            <ToggleButton x:Name="LogoSaveTB" HorizontalAlignment="Right" Background="#3F3F3F" Padding="5" VerticalAlignment="Center" Click="LogoSaveTB_Click">
-                                <TextBlock Text="💾" FontSize="18" Foreground="{StaticResource TextMuted}"/>
-                            </ToggleButton>
+                            <ToggleButton x:Name="LogoSaveTB" Style="{StaticResource SaveToggleStyle}" HorizontalAlignment="Right" Click="LogoSaveTB_Click"/>
                         </Grid>
                     </ToggleButton>
-                    <ToggleButton x:Name="SubtitlesTB" Style="{StaticResource SidebarButtonStyle}" Click="SubtitlesTB_Click" >
-                        <Grid HorizontalAlignment="Stretch" Width="180">
+
+                    <ToggleButton x:Name="SubtitlesTB" Style="{StaticResource SidebarButtonStyle}" Click="SubtitlesTB_Click">
+                        <Grid HorizontalAlignment="Stretch" Width="210">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <TextBlock Text="&#xe7f0;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBlock Text="SUBTITLES" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Grid>
-                    </ToggleButton>
-                    <ToggleButton x:Name="AudioTB" Style="{StaticResource SidebarButtonStyle}" Click="AudioTB_Click" >
-                        <Grid HorizontalAlignment="Stretch" Width="180">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <TextBlock Text="&#xe995;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBlock Text="AUDIO" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#xe7f0;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="22"/>
+                                <TextBlock Text="Subtitles" VerticalAlignment="Center" FontSize="20"/>
                             </StackPanel>
                         </Grid>
                     </ToggleButton>
-                    <ToggleButton x:Name="OutroTB" Style="{StaticResource SidebarButtonStyle}" Click="OutroTB_Click" >
-                        <Grid HorizontalAlignment="Stretch" Width="180">
+
+                    <ToggleButton x:Name="AudioTB" Style="{StaticResource SidebarButtonStyle}" Click="AudioTB_Click">
+                        <Grid HorizontalAlignment="Stretch" Width="210">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <TextBlock Text="&#xe893;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBlock Text="OUTRO" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#xe995;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="22"/>
+                                <TextBlock Text="Audio" VerticalAlignment="Center" FontSize="20"/>
                             </StackPanel>
-                            <ToggleButton x:Name="OutroSaveTB" HorizontalAlignment="Right"  Background="#3F3F3F" Padding="5" VerticalAlignment="Center" Click="OutroSaveTB_Click">
-                                <TextBlock Text="💾" FontSize="18" Foreground="{StaticResource TextMuted}"/>
-                            </ToggleButton>
+                        </Grid>
+                    </ToggleButton>
+
+                    <ToggleButton x:Name="OutroTB" Style="{StaticResource SidebarButtonStyle}" Click="OutroTB_Click">
+                        <Grid HorizontalAlignment="Stretch" Width="210">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="&#xe893;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="22"/>
+                                <TextBlock Text="Outro" VerticalAlignment="Center" FontSize="20"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="OutroSaveTB" Style="{StaticResource SaveToggleStyle}" HorizontalAlignment="Right" Click="OutroSaveTB_Click"/>
                         </Grid>
                     </ToggleButton>
                 </StackPanel>
 
-                <ToggleButton DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                    <Grid HorizontalAlignment="Stretch" Width="180">
+                <!-- Tools button at bottom -->
+                <ToggleButton DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" Width="210">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock Text="&#xec7a;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <TextBlock Text="TOOLS" VerticalAlignment="Center"/>
+                            <TextBlock Text="&#xec7a;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="22"/>
+                            <TextBlock Text="Tools" VerticalAlignment="Center" FontSize="20"/>
                         </StackPanel>
                     </Grid>
                 </ToggleButton>
             </Grid>
         </Border>
 
-        <Grid Grid.Column="1" Margin="15,10,15,15">
+        <!-- ═══════════════════════════════════════════════════════
+             MAIN CONTENT
+             ═══════════════════════════════════════════════════════ -->
+        <Grid Grid.Column="1" Margin="24,20,24,20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*"/>            
+                <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
+            <!-- ─── Materials List ─────────────────────────────────── -->
             <Grid Grid.Row="0">
                 <Grid>
-                    <TextBlock Text="Materials List" DockPanel.Dock="Top" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBlock Text="MATERIALS LIST" FontSize="12" FontWeight="Bold" 
+                               Foreground="{StaticResource TextMuted}" 
+                               HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                    <ListView x:Name="MaterialsLB" ItemsSource="{Binding Materials}" BorderBrush="#3F3F3F" BorderThickness="1,0,1,1"  d:ItemsSource="{d:SampleData ItemCount=5}"  Background="Transparent" Margin="5,30,5,5" AllowDrop="True" DragEnter="MaterialsLB_DragEnter" DragLeave="MaterialsLB_DragLeave" Drop="MaterialsLB_Drop" FontSize="20">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Type" Width="80">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Type}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-
-                                <GridViewColumn Header="Path" Width="Auto">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Path}" Foreground="#AAAAAA" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-
-                                <GridViewColumn Header="Delete" Width="Auto">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content=""  FontFamily="Segoe MDL2 Assets"  Background="Transparent" 
-                                                Foreground="White" BorderThickness="0"
-                                                Command="{Binding DataContext.RemoveMaterialCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <Border Background="{StaticResource BackgroundControl}" CornerRadius="10" 
+                            BorderBrush="{StaticResource BorderSubtle}" BorderThickness="1"
+                            Margin="0,28,0,8">
+                        <ListView x:Name="MaterialsLB" ItemsSource="{Binding Materials}" Style="{StaticResource MaterialsListViewStyle}"
+                                  BorderThickness="0" d:ItemsSource="{d:SampleData ItemCount=5}" 
+                                  Background="Transparent" Margin="0" AllowDrop="True" 
+                                  DragEnter="MaterialsLB_DragEnter" DragLeave="MaterialsLB_DragLeave" 
+                                  Drop="MaterialsLB_Drop" FontSize="16">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Type" Width="80">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Type}" Foreground="{StaticResource Accent}" 
+                                                           VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Path" Width="Auto">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path}" Foreground="{StaticResource TextSecondary}" 
+                                                           TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="" Width="50">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+                                                        Background="Transparent" Foreground="{StaticResource StatusError}" 
+                                                        BorderThickness="0" Cursor="Hand" Opacity="0.6"
+                                                        Command="{Binding DataContext.RemoveMaterialCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                        CommandParameter="{Binding}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Border>
                 </Grid>
             </Grid>
 
-           
-
-            <Grid Grid.Row="2" Grid.Column="1" Margin="0,10,0,0">
+            <!-- ─── Project Settings ───────────────────────────────── -->
+            <Grid Grid.Row="2" Grid.Column="1" Margin="0,8,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Project Settings" DockPanel.Dock="Top" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                <TextBlock Text="PROJECT SETTINGS" FontSize="12" FontWeight="Bold" 
+                           Foreground="{StaticResource TextMuted}" 
+                           HorizontalAlignment="Left" Margin="0,0,0,10"/>
 
                 <UniformGrid Grid.Row="1" Columns="3" Rows="1">
-                    <GroupBox Header="Export Quality" Style="{StaticResource SettingsGroupBoxStyle}" >
-                        <UniformGrid Columns="4" Margin="0,5">
+                    <!-- Export Quality -->
+                    <GroupBox Header="EXPORT QUALITY" Style="{StaticResource SettingsGroupBoxStyle}">
+                        <UniformGrid Columns="5" Margin="0,4">
+                            <RadioButton Content="Custom" Style="{StaticResource QualityRadioButtonStyle}" x:Name="QualityCustom" Checked="QualityCustom_Checked"/>
                             <RadioButton Content="Low" Style="{StaticResource QualityRadioButtonStyle}" x:Name="QualityLow"/>
-                            <RadioButton Content="Medium" Style="{StaticResource QualityRadioButtonStyle}" x:Name="QualityMed" />
+                            <RadioButton Content="Med" Style="{StaticResource QualityRadioButtonStyle}" x:Name="QualityMed"/>
                             <RadioButton Content="High" Style="{StaticResource QualityRadioButtonStyle}" x:Name="QualityHigh"/>
                             <RadioButton Content="Source" Style="{StaticResource QualityRadioButtonStyle}" x:Name="QualitySource" IsChecked="True"/>
                         </UniformGrid>
                     </GroupBox>
 
-                    <GroupBox x:Name="LogoSettingsGB" Visibility="Hidden" Header="Logo" Style="{StaticResource SettingsGroupBoxStyle}" Margin="10,0,10,0">
+                    <!-- Logo Settings -->
+                    <GroupBox x:Name="LogoSettingsGB" Visibility="Hidden" Header="LOGO POSITION" Style="{StaticResource SettingsGroupBoxStyle}" Margin="8,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <UniformGrid Grid.Column="0" Columns="2" Width="80">
-                                <RadioButton Content="↖" FontSize="10" Margin="1" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}"/>
-                                <RadioButton Content="↗" FontSize="10" Margin="1" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" IsChecked="True"/>
-                                <RadioButton Content="↙" FontSize="10" Margin="1" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}"/>
-                                <RadioButton Content="↘" FontSize="10" Margin="1" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}"/>
+                            <UniformGrid Grid.Column="0" Columns="2" Width="76">
+                                <RadioButton x:Name="LogoPosTopLeft" Content="↖" FontSize="11" Margin="1" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" Checked="LogoPositionRB_Checked"/>
+                                <RadioButton x:Name="LogoPosTopRight" Content="↗" FontSize="11" Margin="1" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" IsChecked="True" Checked="LogoPositionRB_Checked"/>
+                                <RadioButton x:Name="LogoPosBotLeft" Content="↙" FontSize="11" Margin="1" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" Checked="LogoPositionRB_Checked"/>
+                                <RadioButton x:Name="LogoPosBotRight" Content="↘" FontSize="11" Margin="1" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" Checked="LogoPositionRB_Checked"/>
                             </UniformGrid>
-
                             <Grid Grid.Column="1" Margin="10,0">
-                                <TextBlock Text="Transparency" Style="{StaticResource SettingLabelStyle}" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top"/>
-                                <TextBox Text="100%" TextAlignment="Center" Height="25" VerticalContentAlignment="Center"/>
+                                <TextBlock Text="Opacity" Style="{StaticResource SettingLabelStyle}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBox x:Name="LogoTransparencyBox" Text="100%" TextAlignment="Center" Style="{StaticResource ModernTextBoxStyle}" Margin="0,20,0,0" LostFocus="LogoTransparencyBox_LostFocus"/>
                             </Grid>
-
-                            <RadioButton x:Name="ManualRB" Grid.Column="2" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" Content="Set Manual" VerticalAlignment="Center" Height="25" Padding="5,0" HorizontalAlignment="Center" Margin="0,0,0,0" Checked="ManualRB_Checked"/>
+                            <RadioButton x:Name="ManualRB" Grid.Column="2" GroupName="LogoPosition" Style="{StaticResource QualityRadioButtonStyle}" Content="Manual" VerticalAlignment="Center" Height="30" Padding="8,0" Checked="ManualRB_Checked"/>
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="Additional" Style="{StaticResource SettingsGroupBoxStyle}">
+                    <!-- Additional -->
+                    <GroupBox Header="ADDITIONAL" Style="{StaticResource SettingsGroupBoxStyle}">
                         <StackPanel VerticalAlignment="Center">
-                            <CheckBox Content="Export To Source Folder" Foreground="White" Margin="0,2"/>
-                            <CheckBox Content="Open Folder After Export" Foreground="White" Margin="0,2"/>
-                            <Button Content="More Settings" HorizontalAlignment="Right" Margin="0,5,0,0"/>
+                            <CheckBox Content="Export to source folder" Style="{StaticResource ToggleSwitchStyle}" Margin="0,5"/>
+                            <CheckBox Content="Open folder after export" Style="{StaticResource ToggleSwitchStyle}" Margin="0,5"/>
                         </StackPanel>
                     </GroupBox>
                 </UniformGrid>
-                
-                <StackPanel Grid.Row="2" Grid.Column="1">
-                    <TextBlock Text="Processing" DockPanel.Dock="Top" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                    <Border   Background="#2D2D2D" Padding="10">
-                        <UniformGrid Rows="1" Columns="3">
 
-                            <Button Background="#333333" Foreground="White" HorizontalAlignment="Left" Padding="10">
-                                <Grid Width="Auto">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xe710;" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <TextBlock x:Name="AddToQueueTextBlock" Text="Add Project to Queue" FontSize="14" HorizontalAlignment="Center" Margin="20,0,0,0" TextAlignment="Center"/>
-                                </Grid>
+                <!-- Custom Quality Panel (expandable) -->
+                <Border CornerRadius="0,0,10,10" Margin="0,-4,0,8" Padding="12,10">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource Bg2Color}"/>
+                    </Border.Background>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=QualityCustom}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <UniformGrid Columns="3" VerticalAlignment="Center">
+                        <StackPanel Margin="4">
+                            <TextBlock Text="Resolution" Foreground="{StaticResource TextMuted}" FontSize="10" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                            <ComboBox x:Name="CustomResolutionCombo" Style="{StaticResource ModernComboBoxStyle}" SelectedIndex="1">
+                                <ComboBoxItem Content="Original (Source)"/>
+                                <ComboBoxItem Content="1920 x 1080"/>
+                                <ComboBoxItem Content="1280 x 720"/>
+                                <ComboBoxItem Content="854 x 480"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="4">
+                            <TextBlock Text="Bitrate (Kbps)" Foreground="{StaticResource TextMuted}" FontSize="10" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                            <TextBox x:Name="CustomBitrateBox" Text="5000" Style="{StaticResource ModernTextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Margin="4">
+                            <TextBlock Text="Frame Rate" Foreground="{StaticResource TextMuted}" FontSize="10" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                            <ComboBox x:Name="CustomFpsCombo" Style="{StaticResource ModernComboBoxStyle}" SelectedIndex="0">
+                                <ComboBoxItem Content="Same as Source"/>
+                                <ComboBoxItem Content="60"/>
+                                <ComboBoxItem Content="30"/>
+                                <ComboBoxItem Content="24"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </UniformGrid>
+                </Border>
+
+                <!-- ─── Processing / Queue ─────────────────────────── -->
+                <StackPanel Grid.Row="2" Grid.Column="1">
+                    <TextBlock Text="PROCESSING" FontSize="12" FontWeight="Bold" 
+                               Foreground="{StaticResource TextMuted}" 
+                               HorizontalAlignment="Left" Margin="0,16,0,10"/>
+
+                    <!-- Output File Name -->
+                    <Border Background="{StaticResource BackgroundControl}" CornerRadius="10,10,0,0" 
+                            BorderBrush="{StaticResource BorderSubtle}" BorderThickness="1,1,1,0" Padding="16,12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Output:" Foreground="{StaticResource TextMuted}" VerticalAlignment="Center" Margin="0,0,12,0" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBox x:Name="OutputFileNameBox" Grid.Column="1" Style="{StaticResource ModernTextBoxStyle}" Text="" ToolTip="Leave empty for auto-name"/>
+                            <TextBlock Grid.Column="2" Text=".mp4" Foreground="{StaticResource TextMuted}" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="13"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Queue Actions -->
+                    <Border Background="{StaticResource BackgroundControl}" CornerRadius="0,0,10,10" 
+                            BorderBrush="{StaticResource BorderSubtle}" BorderThickness="1,0,1,1" Padding="14,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="AddToQueueButton" Grid.Column="0" Click="AddToQueueButton_Click" Cursor="Hand"
+                                    Background="{StaticResource BackgroundElevated}" Foreground="{StaticResource TextPrimary}" 
+                                    BorderBrush="{StaticResource BorderSubtle}" BorderThickness="1" Padding="14,8">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Bd" Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" 
+                                                CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xe710;" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{StaticResource Accent}"/>
+                                                <TextBlock x:Name="AddToQueueTextBlock" Text="Add to Queue" FontSize="14" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource BackgroundSurface}"/>
+                                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource BorderHover}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
                             </Button>
-                            
-                            <Label x:Name="ItemsInQueueLabel" Content="Items in queue: 0" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            
-                            <Button Background="#333333" Padding="10" Foreground="White" HorizontalAlignment="Right"  HorizontalContentAlignment="Center">
-                                <Grid>
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8FD;" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <TextBlock x:Name="SeeQueueListTextBlock" Text="See Queue List" FontSize="14" HorizontalAlignment="Center" Margin="20,0,0,0" TextAlignment="Center"/>
-                                </Grid>
+
+                            <Label x:Name="ItemsInQueueLabel" Grid.Column="1" Content="Items in queue: 0" 
+                                   FontWeight="SemiBold" FontSize="14" Foreground="{StaticResource TextMuted}" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <Button x:Name="SeeQueueListButton" Grid.Column="2" Click="SeeQueueListButton_Click" Cursor="Hand"
+                                    Background="{StaticResource BackgroundElevated}" Foreground="{StaticResource TextPrimary}" 
+                                    BorderBrush="{StaticResource BorderSubtle}" BorderThickness="1" Padding="14,8">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Bd" Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" 
+                                                CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8FD;" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{StaticResource TextSecondary}"/>
+                                                <TextBlock x:Name="SeeQueueListTextBlock" Text="Queue List" FontSize="14" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource BackgroundSurface}"/>
+                                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource BorderHover}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
                             </Button>
-                        </UniformGrid>
+                        </Grid>
                     </Border>
                 </StackPanel>
-               
-
             </Grid>
         </Grid>
 
-        <Border Grid.Row="1" Grid.Column="0" Background="#2D2D2D" Padding="10">
+        <!-- ═══════════════════════════════════════════════════════
+             BOTTOM BAR — SIDEBAR
+             ═══════════════════════════════════════════════════════ -->
+        <Border Grid.Row="1" Grid.Column="0" Background="{StaticResource BackgroundSidebar}" 
+                BorderBrush="{StaticResource BorderSubtle}" BorderThickness="0,1,1,0" Padding="10">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="🗑" Width="40" Margin="0,0,5,0"  Background="#333333" Foreground="White" FontSize="26"/>
-                <Button Content="⚙" Width="40" Margin="0,0,5,0" Background="#333333" Foreground="White" FontSize="26"/>
-                <Button Content="&#xe946;" FontFamily="Segoe MDL2 Assets"  Width="40" Background="#333333" Foreground="White" FontSize="30" Padding="1,4,1,0" />
+                <Button Style="{StaticResource ToolbarButtonStyle}" ToolTip="Load Project" Click="LoadProjectButton_Click" Margin="0,0,5,0">
+                    <TextBlock Text="📂" FontSize="18"/>
+                </Button>
+                <Button Style="{StaticResource ToolbarButtonStyle}" ToolTip="Save Project" Click="SaveProjectButton_Click" Margin="0,0,5,0">
+                    <TextBlock Text="💾" FontSize="18"/>
+                </Button>
+                <Button Style="{StaticResource ToolbarButtonStyle}" ToolTip="Settings" Margin="0,0,5,0">
+                    <TextBlock Text="⚙" FontSize="20"/>
+                </Button>
             </StackPanel>
         </Border>
 
-        <Button x:Name="FirstStratButton" Grid.Column="1" Grid.Row="1"  Background="#FF107C10" Width="200" Foreground="White" HorizontalAlignment="Center" BorderBrush="{x:Null}" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Padding="0,0,0,0" Click="FirstStratButton_Click">
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEDB5;" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                <TextBlock x:Name="StartTextBlock"  Text="Start" FontSize="28" HorizontalAlignment="Center" Margin="30,0,0,0" TextAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
-        </Button>
-        
-        
-        
-        
+        <!-- ═══════════════════════════════════════════════════════
+             BOTTOM BAR — START BUTTON
+             ═══════════════════════════════════════════════════════ -->
+        <Border Grid.Column="1" Grid.Row="1" Background="{StaticResource BackgroundMain}" 
+                BorderBrush="{StaticResource BorderSubtle}" BorderThickness="0,1,0,0">
+            <Button x:Name="FirstStratButton" Style="{StaticResource StartButtonStyle}" 
+                    Width="250" Height="48" HorizontalAlignment="Center" Click="FirstStratButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEDB5;" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock x:Name="StartTextBlock" Text="Start" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Border>
     </Grid>
 </Window>

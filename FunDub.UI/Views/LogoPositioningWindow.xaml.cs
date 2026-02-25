@@ -18,6 +18,11 @@ namespace FunDub.UI.Views
         private bool _isDragging = false;
         private Point _clickPosition;
 
+        public double RelativeX { get; private set; }
+        public double RelativeY { get; private set; }
+        public double LogoScale { get; private set; }
+        public double LogoOpacity { get; private set; }
+
 
         public LogoPositioningWindow()
         {
@@ -57,13 +62,12 @@ namespace FunDub.UI.Views
             double y = Canvas.GetTop(LogoImageBorder);
 
             // Calculate relative position (0.0 to 1.0)
-            double relativeX = x / OverlayCanvas.ActualWidth;
-            double relativeY = y / OverlayCanvas.ActualHeight;
-            double finalScale = ScaleSlider.Value;
-            double finalOpacity = OpacitySlider.Value;
+            this.RelativeX = x / OverlayCanvas.ActualWidth;
+            this.RelativeY = y / OverlayCanvas.ActualHeight;
+            this.LogoScale = ScaleSlider.Value;
+            this.LogoOpacity = OpacitySlider.Value;
 
-            // You can now pass these 4 values back to your FFmpeg command builder!
-            this.DialogResult = true;
+            this.DialogResult = true; // Closes window and returns 'true'
         }
 
         private void UpdateBackgroundImage_Click(object sender, RoutedEventArgs e)
